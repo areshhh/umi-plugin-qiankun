@@ -45,22 +45,23 @@ export default function(api: IApi, options: Options) {
     return memo;
   });
 
+  // 去掉source-map, 解决VS Code无法调试的问题
   // source-map 跨域设置
-  if (process.env.NODE_ENV === 'development') {
-    // 变更 webpack-dev-server websocket 默认监听地址
-    process.env.SOCKET_SERVER = `${protocol}://localhost:${port}/`;
-    api.chainWebpackConfig(memo => {
-      // 禁用 devtool，启用 SourceMapDevToolPlugin
-      memo.devtool(false);
-      memo.plugin('source-map').use(webpack.SourceMapDevToolPlugin, [
-        {
-          namespace: app,
-          append: `\n//# sourceMappingURL=${protocol}://localhost:${port}/[url]`,
-          filename: '[name].js.map',
-        },
-      ]);
-    });
-  }
+  //if (process.env.NODE_ENV === 'development') {
+  //  // 变更 webpack-dev-server websocket 默认监听地址
+  //  process.env.SOCKET_SERVER = `${protocol}://localhost:${port}/`;
+  //  api.chainWebpackConfig(memo => {
+  //    // 禁用 devtool，启用 SourceMapDevToolPlugin
+  //    memo.devtool(false);
+  //    memo.plugin('source-map').use(webpack.SourceMapDevToolPlugin, [
+  //      {
+  //        namespace: app,
+  //        append: `\n//# sourceMappingURL=${protocol}://localhost:${port}/[url]`,
+  //        filename: '[name].js.map',
+  //      },
+  //    ]);
+  //  });
+  //}
 
   api.writeTmpFile(
     'qiankunContext.js',
