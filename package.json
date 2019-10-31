@@ -62,12 +62,6 @@
     "umi-test": "^1.8.2",
     "umi-types": "^0.5.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test"
-    }
-  },
   "lint-staged": {
     "**/*.{js,ts,json,css,md}": [
       "npm run prettier",
